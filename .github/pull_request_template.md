@@ -1,22 +1,32 @@
-## Summary
+## Description
 
-<!-- What did you change, and why? One to three sentences. -->
+<!-- What changed, and why? -->
 
-## Type of change
+## Related Ticket
 
-- [ ] New or updated test
-- [ ] Page object, keyword, or test data
-- [ ] Config, GitHub Action, or ignore rules
-- [ ] Lesson / docs only
+<!-- Issue / ticket id, or "n/a" -->
 
-## Test plan
+## Type of Change
 
-- [ ] `npx playwright test` passes on my machine
-- [ ] I ran the changed spec (headed, if I touched the UI)
-- [ ] Locators live in a **page object**, not copied into the spec
-- [ ] New data is unique or lives in `src/data/`
-- [ ] I did not commit `.env`, `node_modules/`, or `playwright/.auth/`
+- [ ] New Test
+- [ ] Bug Fix
+- [ ] Framework Enhancement
+- [ ] Documentation
+- [ ] Refactoring
 
-## Notes for reviewers
+## Testing Performed
 
-<!-- Anything surprising? Screenshots or traces? -->
+- [ ] Tests pass locally
+- [ ] Type checking passes (`npm run typecheck`)
+- [ ] Lint passes (`npm run lint`)
+- [ ] Smoke tests pass where applicable (`npm run test:smoke`)
+- [ ] No secrets committed
+- [ ] Documentation updated
+
+## Screenshots / Reports
+
+<!-- Trace, HTML report, or "n/a" -->
+
+## Reviewer Notes
+
+<!-- Anything surprising? -->

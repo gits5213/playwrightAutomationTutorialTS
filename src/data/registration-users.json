@@ -1,0 +1,28 @@
+[
+  {
+    "name": "a short first name",
+    "firstName": "Ann",
+    "lastName": "Lee",
+    "email": "ann.lee@example.com",
+    "phone": "1234567890",
+    "username": "annlee",
+    "password": "Practice1",
+    "confirmPassword": "Practice1",
+    "gender": "Female",
+    "dateOfBirth": "1992-03-20",
+    "country": "Canada"
+  },
+  {
+    "name": "a longer first name",
+    "firstName": "Jonathan",
+    "lastName": "Nguyen",
+    "email": "jonathan.nguyen@example.com",
+    "phone": "1234567890",
+    "username": "jnguyen",
+    "password": "Practice1",
+    "confirmPassword": "Practice1",
+    "gender": "Male",
+    "dateOfBirth": "1988-11-02",
+    "country": "United States"
+  }
+]

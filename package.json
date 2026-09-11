@@ -1,23 +1,34 @@
 {
   "name": "playwright-automation-tutorial-ts",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "Step-by-step Playwright TypeScript tutorial for maintainable, reusable, scalable tests.",
+  "description": "Playwright TypeScript course and framework: GITS registration form, beginner to QA architect.",
   "scripts": {
-    "test": "playwright test",
-    "test:headed": "playwright test --headed",
+    "test": "playwright test --project=chromium",
+    "test:headed": "playwright test --project=chromium --headed",
     "test:ui": "playwright test --ui",
-    "test:smoke": "playwright test --grep @smoke",
-    "test:basic": "playwright test tests/basic",
-    "test:e2e": "playwright test tests/e2e",
-    "test:api": "playwright test tests/api",
-    "test:data": "playwright test tests/e2e/todo.data-driven.spec.ts",
-    "test:keywords": "playwright test tests/e2e/todo.keywords.spec.ts",
+    "test:debug": "playwright test --project=chromium --debug",
+    "test:smoke": "playwright test --project=chromium --grep @smoke",
+    "test:regression": "playwright test --project=chromium --grep @regression",
+    "test:chromium": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "report": "playwright show-report",
-    "codegen": "playwright codegen https://demo.playwright.dev/todomvc"
+    "codegen": "playwright codegen https://gitsuniversity.org/practice/registration-form/"
   },
   "devDependencies": {
+    "@eslint/js": "^9.16.0",
     "@playwright/test": "1.57.0",
-    "@types/node": "^22.10.0"
+    "@types/node": "^22.10.0",
+    "eslint": "^9.16.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-playwright": "^2.2.0",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.0"
   }
 }

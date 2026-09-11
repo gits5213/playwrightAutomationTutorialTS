@@ -6,7 +6,6 @@ on:
   pull_request:
     branches: [main, master]
 
-# If you push twice quickly, cancel the older run on the same branch.
 concurrency:
   group: playwright-${{ github.ref }}
   cancel-in-progress: true
@@ -28,13 +27,19 @@ jobs:
       - name: Install npm packages
         run: npm ci
 
-      - name: Install Chromium for Playwright
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Install Chromium
         run: npx playwright install chromium --with-deps
 
       - name: Run Playwright tests
         run: npx playwright test --project=chromium
-        # When the suite is huge, pull requests can run only smoke:
-        # npx playwright test --project=chromium --grep @smoke
+        env:
+          RUN_REGISTRATION_SUBMISSION: 'false'
 
       - name: Upload HTML report
         uses: actions/upload-artifact@v4
