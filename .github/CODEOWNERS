@@ -1,0 +1,13 @@
+# One reviewer per area. Replace @gits5213 with a team if you have one.
+# GitHub will request a review from these people on matching files.
+
+# Default owner for anything not listed below.
+* @gits5213
+
+# Page objects, keywords, and fixtures are the heart of the suite.
+/src/pages/ @gits5213
+/src/keywords/ @gits5213
+/src/fixtures/ @gits5213
+
+# CI and review rules affect everyone. Keep this list small.
+/.github/ @gits5213

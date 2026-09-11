@@ -17,6 +17,7 @@ Go in order. Each part builds on the last.
 1. **Part 1 — Basic:** install tools, write a first test, find buttons, check results.
 2. **Part 2 — Advanced:** stop copying steps, share setup, keep data and environments clean.
 3. **Part 3 — Architectural:** fold everything into a structure teams use in real companies.
+4. **Part 4 — Patterns and GitHub teamwork:** deeper POM, data-driven, keyword-driven, `.gitignore`, Actions, CODEOWNERS, PR template.
 
 You do **not** need to be a TypeScript expert. TypeScript here is a safety net: the editor warns you when a name is wrong, before the test even runs.
 
@@ -40,7 +41,7 @@ npx playwright install chromium
 npx playwright test
 ```
 
-You should see **8 passed**. Then read the lessons in order. When a lesson says **Try it**, run the matching file from the table below.
+You should see **16 passed**. Then read the lessons in order. When a lesson says **Try it**, run the matching file from the table below.
 
 Practice site used in the examples:
 
@@ -62,7 +63,15 @@ Open that link once in Chrome. You will see a to-do list. That is the page the f
 | Part 2 | [tests/api/demo-site.spec.ts](tests/api/demo-site.spec.ts) | A check with no browser |
 | Part 3 | [playwright.config.ts](playwright.config.ts) | The control room |
 | Part 3 | [examples/auth.setup.example.ts](examples/auth.setup.example.ts) | Login-once pattern (template) |
-| Part 3 | [.github/workflows/playwright.yml](.github/workflows/playwright.yml) | Run tests on every change |
+| Part 3–4 | [.github/workflows/playwright.yml](.github/workflows/playwright.yml) | Run tests on every change |
+| Part 4 | [src/pages/base.page.ts](src/pages/base.page.ts) | Shared page moves (POM base class) |
+| Part 4 | [src/keywords/todo.keywords.ts](src/keywords/todo.keywords.ts) | Named business steps |
+| Part 4 | [src/data/todo-add-cases.json](src/data/todo-add-cases.json) | Data-driven table (JSON) |
+| Part 4 | [tests/e2e/todo.data-driven.spec.ts](tests/e2e/todo.data-driven.spec.ts) | Same steps, many rows |
+| Part 4 | [tests/e2e/todo.keywords.spec.ts](tests/e2e/todo.keywords.spec.ts) | Tests written as keywords |
+| Part 4 | [.gitignore](.gitignore) | What Git must not upload |
+| Part 4 | [.github/CODEOWNERS](.github/CODEOWNERS) | Who reviews which folder |
+| Part 4 | [.github/pull_request_template.md](.github/pull_request_template.md) | Checklist on every PR |
 
 ---
 
@@ -77,6 +86,10 @@ Open that link once in Chrome. You will see a to-do list. That is the page the f
 | **Locator** | How a test finds a box, button, or heading on the page. |
 | **Assertion** | A check. “This heading should be visible.” |
 | **Page Object** | A named helper that knows one screen of the app (login page, cart page). |
+| **Keyword** | A named business step, like “add a to-do.” In Playwright it is a function. |
+| **Data-driven** | The same steps, many example rows (a table of titles, users, or cases). |
+| **CODEOWNERS** | A list that tells GitHub who must review a folder. |
+| **Pull request (PR)** | A proposed change plus a conversation, before it joins the main branch. |
 | **Fixture** | A ready-made ingredient Playwright hands your test (a browser tab, a logged-in user). |
 | **Flaky test** | A test that sometimes passes and sometimes fails with no code change. Treat this as a bug. |
 | **CI** | A robot computer that runs your tests on every change (GitHub Actions is one example). |
@@ -721,6 +734,8 @@ A practical rule for this class:
 ### Check that you got it
 
 If the placeholder changes, you should know **exactly one file** to edit.
+
+A deeper POM lesson (base page, components, what not to store in the class) is [Lesson 23](lessons/23-page-object-model-in-depth.md).
 
 **Next:** Lesson 11 — Fixtures
 
@@ -1402,7 +1417,7 @@ If tests only run on your laptop, they will not run. People forget.
 
 Industry standard: every pull request runs at least the **smoke** set. The full set runs on main, or nightly.
 
-Playwright’s installer can add `.github/workflows/playwright.yml`. Keep it. Adjust browsers and secrets.
+Playwright’s workflow in this repo is [.github/workflows/playwright.yml](.github/workflows/playwright.yml). [Lesson 27](lessons/27-github-actions.md) walks through that file line by line.
 
 A typical job does this:
 
@@ -1542,6 +1557,7 @@ Isolated tests + unique data + parallel workers + shards + smoke vs full suite. 
 | Basic | What a test is, locators, asserts, reports | You cannot start |
 | Advanced | POM, fixtures, data, tags, API, traces | You drown in copy-paste |
 | Architectural | folders, config, auth projects, CI, gates | The team cannot grow the suite |
+| Patterns + GitHub | deeper POM, data-driven, keywords, ignore, Actions, owners, PR form | The suite and the team do not share a language |
 
 You do not need every advanced trick on day one. You **do** need to know which layer a new line of code belongs in.
 
@@ -1557,6 +1573,47 @@ You do not need every advanced trick on day one. You **do** need to know which l
 
 Grow the architecture when **pain appears**, but grow it **into this shape**, not into a new invention every week.
 
+**Next:** [Part 4 — Patterns and GitHub teamwork](#part-4--patterns-and-github-teamwork)
+
+---
+
+# Part 4 — Patterns and GitHub teamwork
+
+**Goal:** name the three test-design styles teams actually combine (POM, data-driven, keyword-driven), then use GitHub the way a real team does.
+
+These lessons live in their own files so you can print or share one at a time. Read them in order.
+
+| Order | Lesson | What you will be able to do |
+| --- | --- | --- |
+| 23 | [Page Object Model in depth](lessons/23-page-object-model-in-depth.md) | Split base page, page, and component |
+| 24 | [Data-driven tests](lessons/24-data-driven.md) | Loop a table of examples |
+| 25 | [Keyword-driven tests](lessons/25-keyword-driven.md) | Write stories in named steps |
+| 26 | [`.gitignore`](lessons/26-gitignore.md) | Keep secrets and reports off GitHub |
+| 27 | [GitHub Actions](lessons/27-github-actions.md) | Explain the cloud test run |
+| 28 | [CODEOWNERS](lessons/28-codeowners.md) | Auto-request the right reviewers |
+| 29 | [Pull request template](lessons/29-pull-request-template.md) | Give every PR the same checklist |
+
+### How the three patterns fit together
+
+They are **layers**, not rivals.
+
+```text
+Keyword story     “add a to-do called Buy milk”
+      ↓
+Page object       how that screen clicks and types
+      ↓
+Data table        which titles, users, or cases to use
+      ↓
+GitHub PR         template + CODEOWNERS + Actions
+```
+
+**POM** protects locators (**maintainability**).  
+**Keywords** reuse business language (**reusability**).  
+**Data-driven** adds examples without new functions (**scalability**).  
+**GitHub files** keep the *team* maintainable: ignore junk, run CI, assign owners, review with a form.
+
+Start here: [Lesson 23 — Page Object Model in depth](lessons/23-page-object-model-in-depth.md).
+
 ---
 
 # Cheatsheet
@@ -1569,6 +1626,8 @@ npx playwright install chromium
 npx playwright test
 npx playwright test tests/basic/first-test.spec.ts
 npx playwright test tests/e2e/todo.spec.ts
+npx playwright test tests/e2e/todo.data-driven.spec.ts
+npx playwright test tests/e2e/todo.keywords.spec.ts
 npx playwright test --headed
 npx playwright test --ui
 npx playwright test --grep @smoke
@@ -1603,6 +1662,10 @@ await expect(page).toHaveURL(/dashboard/);
 | Test what a user sees | Depend on CSS class soup |
 | One story per test | Couple tests through leftover data |
 | Page objects for screens | Duplicate locators |
+| Keywords for business steps | Locators inside keyword files |
+| Data tables for examples | Copy-paste the same test per row |
+| `.gitignore` for secrets and reports | Commit `.env` or `node_modules/` |
+| CODEOWNERS + PR template | Reviews with no checklist |
 | Fixtures for setup | Copy `beforeEach` across files |
 | `storageState` for login | UI-login in every test |
 | Unique data | Hard-coded `sam@example.com` in parallel tests |
@@ -1629,6 +1692,6 @@ Then pick **one** real page at work or school. Write one smoke test. Extract one
 
 You should be able to say:
 
-> Playwright runs checklists in TypeScript. I find elements the way a person would. I hide locators in page objects, hide setup in fixtures, hide login in a saved session, and hide environment details in config. Isolated tests plus CI let the suite grow without falling apart.
+> Playwright runs checklists in TypeScript. I find elements the way a person would. I hide locators in page objects, hide business steps in keywords, hide examples in data tables, hide setup in fixtures, and hide environment details in config. Git ignore, Actions, CODEOWNERS, and a PR template keep the team as maintainable as the tests.
 
 If that paragraph makes sense, you are no longer at “my first test.” You are ready to keep a suite **maintainable, reusable, and scalable**.

@@ -11,6 +11,8 @@
     "test:basic": "playwright test tests/basic",
     "test:e2e": "playwright test tests/e2e",
     "test:api": "playwright test tests/api",
+    "test:data": "playwright test tests/e2e/todo.data-driven.spec.ts",
+    "test:keywords": "playwright test tests/e2e/todo.keywords.spec.ts",
     "report": "playwright show-report",
     "codegen": "playwright codegen https://demo.playwright.dev/todomvc"
   },

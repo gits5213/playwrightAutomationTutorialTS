@@ -1,9 +1,24 @@
+# --- Secrets and machine-specific files ---
+# Never commit passwords, tokens, or local env overrides.
+.env
+.env.*
+!.env.example
+
+# --- Dependencies ---
+# Reinstall with `npm install`. Do not copy this folder into Git.
 node_modules/
+
+# --- Playwright output ---
+# Reports, traces, videos, and screenshots from a local run.
 test-results/
 playwright-report/
 blob-report/
-playwright/.auth/
 playwright/.cache/
-.env
+
+# Saved login sessions contain cookies. Keep them off GitHub.
+playwright/.auth/
+
+# --- Editor and OS junk ---
 .DS_Store
+.idea/
 *.log

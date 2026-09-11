@@ -1,25 +1,25 @@
 import { type Locator, type Page } from '@playwright/test';
+import { BasePage } from './base.page';
 import { TodoItemComponent } from './components/todo-item.component';
 
 /**
  * One screen of the app. Locators and user actions live here so tests
  * stay short and a UI change is fixed in one file.
  */
-export class TodoPage {
-  readonly page: Page;
+export class TodoPage extends BasePage {
   readonly newTodo: Locator;
   readonly todoTitles: Locator;
   readonly todoItems: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.newTodo = page.getByPlaceholder('What needs to be done?');
     this.todoTitles = page.getByTestId('todo-title');
     this.todoItems = page.getByTestId('todo-item');
   }
 
   async goto() {
-    await this.page.goto('/todomvc');
+    await this.open('/todomvc');
   }
 
   async addTodo(title: string) {
