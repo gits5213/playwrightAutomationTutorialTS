@@ -1,9 +1,7 @@
 # Playwright + TypeScript QA Automation University
 
----------
-https://github.com/user-attachments/assets/17f55fe4-2397-4397-b72d-2942bbbf80fb
----------
 
+https://github.com/user-attachments/assets/17f55fe4-2397-4397-b72d-2942bbbf80fb
 
 
 A **training course** and a **working test framework** in one repository.
